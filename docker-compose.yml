@@ -59,7 +59,7 @@ services:
       - INFLUXDB_ORG=benchmark
       - INFLUXDB_BUCKET=user_actions
       - INFLUXDB_USE_SSL=false
-      - INSERT_COUNT=10000
+      - INSERT_COUNT=1000
     profiles:
       - no-default
 

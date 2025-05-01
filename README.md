@@ -55,7 +55,7 @@ docker compose down --volumes
 
 | Variable | Description | Default Value |
 |----------|-------------|---------------|
-| INSERT_COUNT | Number of data entries to insert | 10000 |
+| INSERT_COUNT | Number of data entries to insert | 1000 |
 
 ## License
 
