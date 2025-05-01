@@ -45,6 +45,8 @@ services:
     build:
       context: benchmark
       dockerfile: Dockerfile
+    volumes:
+      - ./benchmark:/app
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
