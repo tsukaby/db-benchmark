@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+ruby '3.4.3'
+
+gem 'pg', '~> 1.5'
+gem 'influxdb-client', '~> 2.9' 

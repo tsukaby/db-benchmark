@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    influxdb-client (2.9.0)
+    pg (1.5.9)
+
+PLATFORMS
+  arm64-darwin-24
+  ruby
+
+DEPENDENCIES
+  influxdb-client (~> 2.9)
+  pg (~> 1.5)
+
+BUNDLED WITH
+   2.6.7
