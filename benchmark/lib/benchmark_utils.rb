@@ -1,11 +1,26 @@
 require 'securerandom'
 
 module BenchmarkUtils
-  def self.generate_user_action(i)
+  CAPITALS = [
+    "Tokyo",
+    "London",
+    "Paris",
+    "Berlin",
+    "Washington",
+    "Beijing",
+    "Moscow",
+    "Rome",
+    "Madrid",
+    "Seoul",
+  ].freeze
+
+  def self.generate_temperature_log(i)
     {
-      user_id: SecureRandom.uuid,
-      action: i % 10,
-      performed_at: Time.now - i # minus seconds
+      device_id: "device_#{SecureRandom.hex(4)}",
+      location: CAPITALS[i % CAPITALS.size],
+      temperature: rand(-5..40.0).round(1),
+      unit: 'C',
+      created_at: Time.now - i # minus seconds
     }
   end
 end 

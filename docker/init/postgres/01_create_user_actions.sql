@@ -1,12 +1,14 @@
-CREATE TABLE IF NOT EXISTS user_actions (
-    performed_at TIMESTAMP NOT NULL,
-    user_id UUID NOT NULL,
-    action VARCHAR(255) NOT NULL
+CREATE TABLE IF NOT EXISTS temperature_logs (
+    created_at TIMESTAMP NOT NULL,
+    device_id VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    temperature FLOAT NOT NULL,
+    unit VARCHAR(1) NOT NULL DEFAULT 'C'
 );
 
 -- Create composite indexes
-CREATE INDEX IF NOT EXISTS idx_user_actions_performed_at_user_id 
-ON user_actions (performed_at, user_id);
+CREATE INDEX IF NOT EXISTS idx_temperature_logs_created_at_device_id 
+ON temperature_logs (created_at, device_id);
 
-CREATE INDEX IF NOT EXISTS idx_user_actions_performed_at_action 
-ON user_actions (performed_at, action); 
+CREATE INDEX IF NOT EXISTS idx_temperature_logs_created_at_location 
+ON temperature_logs (created_at, location);

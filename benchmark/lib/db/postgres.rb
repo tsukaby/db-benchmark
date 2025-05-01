@@ -39,10 +39,10 @@ module DB
     def insert_actions(count)
       time = Benchmark.realtime do
         count.times do |i|
-          action = BenchmarkUtils.generate_user_action(i)
+          log = BenchmarkUtils.generate_temperature_log(i)
           @conn.exec_params(
-            'INSERT INTO user_actions (performed_at, user_id, action) VALUES ($1, $2, $3)',
-            [action[:performed_at], action[:user_id], action[:action]]
+            'INSERT INTO temperature_logs (created_at, device_id, location, temperature, unit) VALUES ($1, $2, $3, $4, $5)',
+            [log[:created_at], log[:device_id], log[:location], log[:temperature], log[:unit]]
           )
         end
       end

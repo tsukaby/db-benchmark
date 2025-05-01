@@ -12,7 +12,7 @@ module DB
         "http://#{host}:#{port}",
         ENV.fetch('INFLUXDB_TOKEN', 'benchmark-token'),
         org: ENV.fetch('INFLUXDB_ORG', 'benchmark'),
-        bucket: ENV.fetch('INFLUXDB_BUCKET', 'user_actions'),
+        bucket: ENV.fetch('INFLUXDB_BUCKET', 'temperature_logs'),
         precision: InfluxDB2::WritePrecision::SECOND,
         use_ssl: ENV.fetch('INFLUXDB_USE_SSL', 'false') == 'true'
       )
@@ -49,11 +49,13 @@ module DB
     def insert_actions(count)
       time = Benchmark.realtime do
         count.times do |i|
-          action = BenchmarkUtils.generate_user_action(i)
-          point = InfluxDB2::Point.new(name: 'user_action')
-            .add_tag('user_id', action[:user_id])
-            .add_field('action', action[:action])
-            .time(action[:performed_at], InfluxDB2::WritePrecision::SECOND)
+          log = BenchmarkUtils.generate_temperature_log(i)
+          point = InfluxDB2::Point.new(name: 'temperature')
+            .add_tag('device_id', log[:device_id])
+            .add_tag('location', log[:location])
+            .add_tag('unit', log[:unit])
+            .add_field('temperature', log[:temperature])
+            .time(log[:created_at], InfluxDB2::WritePrecision::SECOND)
 
           @write_api.write(data: point)
         end
